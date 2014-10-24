@@ -1,0 +1,35 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  cache_directories:
+    - "~/docker"
+  override:
+    - docker info
+    - if [[ -e ~/docker/ruby.tar ]]; then docker load -i ~/docker/ruby.tar; fi
+    - docker build -t=evgenyg/todo-sample-app .
+    - if [[ ! -e ~/docker/ruby.tar ]]; then mkdir -p ~/docker; docker save -o ~/docker/ruby.tar evgenyg/ruby; fi
+
+database:
+  override:
+    - id
+
+test:
+  override:
+    - docker run evgenyg/todo-sample-app bundle exec rake test
+    - docker run -dp 3000:3000 --env DB_HOST --env DB_USER --env DB_PASS evgenyg/todo-sample-app
+    - sleep 10
+    - curl -f http://localhost:3000
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - docker login -u evgenyg -p $DOCKER_AUTH -e $DOCKER_EMAIL
+      - docker push evgenyg/todo-sample-app
+
+teardown:
+  override:
+    - docker stop $(docker ps -a -q)
+    - docker kill $(docker ps -a -q)

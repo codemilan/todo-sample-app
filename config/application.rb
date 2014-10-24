@@ -6,6 +6,16 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+application_file = 'config/application.yml'
+if File.exists?( application_file )
+  begin
+    yaml = YAML.load_file( application_file )[ Rails.env ]
+    ENV.update yaml if yaml
+  rescue Exception => e
+   raise "Failed to load '#{ application_file }/#{ Rails.env }': " + e.message
+  end
+end
+
 module TodoApp
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

@@ -1,0 +1,15 @@
+---
+# --------------------------------------------------------------------
+# Ansible playbook for running "evgenyg/todo-sample-app" Docker image
+# --------------------------------------------------------------------
+
+- name:  TODO Sample App auto-run
+  hosts: all
+  sudo:  yes
+
+  roles:
+    - { role:       docker,
+        app_name:   'todo-sample-app',
+        ports:      [ 3000 ],
+        image:      'evgenyg/todo-sample-app',
+        env_vars:   [ 'DB_HOST', 'DB_USER', 'DB_PASS' ] }
