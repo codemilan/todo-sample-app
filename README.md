@@ -13,3 +13,8 @@ where you can create tasks, edit details about them, and update their status.
 
 While some additional functionality may be added over time to make the example
 more practical, the application is designed to be simple and easy to understand.
+
+
+## Docker, Ansible, CircleCI
+
+This repo has Dockerfile, Ansible playbooks and CircleCI config added to it, see full article at [cloudnative.io/docs/bakery/docker/](https://cloudnative.io/docs/bakery/docker/).
