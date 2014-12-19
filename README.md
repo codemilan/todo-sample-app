@@ -17,4 +17,4 @@ more practical, the application is designed to be simple and easy to understand.
 
 ## Docker, Ansible, CircleCI
 
-This repo has Dockerfile, Ansible playbooks and CircleCI config added to it, see full article at [cloudnative.io/docs/bakery/docker/](https://cloudnative.io/docs/bakery/docker/).
+This repo has Dockerfile, Ansible playbooks and CircleCI config [added to it](https://github.com/evgeny-goldin/todo-sample-app/commit/067bce90f9a367630921a574e6f06a032417f059), see full article at [cloudnative.io/docs/bakery/docker/](https://cloudnative.io/docs/bakery/docker/).
